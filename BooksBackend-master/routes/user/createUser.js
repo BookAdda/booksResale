@@ -1,8 +1,10 @@
 var router=require('express').Router();
 var userSchema= require('../../model/user');
 
-router.get('/register',function (req,res) {
+router.post('/register',function (req,res) {
+
     console.log(req.body);
+
     newUser = new userSchema(
             {
                 name:req.body.name,
