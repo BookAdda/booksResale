@@ -1,13 +1,13 @@
 var router=require('express').Router();
 var booksSchema =require('../../model/books');
-const port=process.env.PORT ||8000;
-router.get('/',function (req,res) {
+const port=process.env.PORT || 8000;
 
+router.get('/',function (req,res) {
+console.log("hello")
     var loveCardData=[];
     var scienceCardData=[];
     var  autobiographyCardData=[];
     var mysteryCardData=[];
-    var totalData=[];
 
     var promise1Love= new Promise(function (resolve,reject) {
         booksSchema.find({category:'love'}).limit(4)
@@ -73,15 +73,37 @@ router.get('/',function (req,res) {
     });
     Promise.all([promise1Love,promise2science,promise3autobiography,promise4mystery])
         .then(function () {
+            var totalData=[];
 
-            totalData=totalData.concat(loveCardData);
-            totalData=totalData.concat(scienceCardData);
-            totalData=totalData.concat(autobiographyCardData);
-            totalData=totalData.concat(mysteryCardData);
-            for(var i=0;i<totalData.length;i++)
+
+            function addImgDomain(arr)  //adding domain to images, like localhost or so...
             {
-                totalData[i].imgLink = `http://localhost:${port}`+ totalData[i].imgLink;
+
+
+                for (var i = 0; i < arr.length; i++)
+                {
+                    arr[i].imgLink =  `http://localhost:${port}`+ arr[i].imgLink;
+                }
+                return arr;
             }
+
+            loveCardData= addImgDomain(loveCardData);
+            scienceCardData=addImgDomain(scienceCardData);
+            autobiographyCardData=addImgDomain(autobiographyCardData);
+            mysteryCardData=addImgDomain(mysteryCardData);
+
+
+            loveCardData = { 'love':loveCardData };
+            scienceCardData = { 'science':scienceCardData };
+            autobiographyCardData = { 'autobiography':autobiographyCardData };
+            mysteryCardData = { 'mystery':mysteryCardData };
+
+           totalData.push(loveCardData);
+           totalData.push(scienceCardData);
+           totalData.push(autobiographyCardData);
+           totalData.push(mysteryCardData);
+
+
             res.json(totalData)
         })
 

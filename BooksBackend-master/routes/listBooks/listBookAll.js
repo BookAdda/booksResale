@@ -8,7 +8,8 @@ router.get('/',function (req,res) {
 
         for(var i=0;i<data.length;i++)
         {
-            data[i].imgLink=`http://localhost:${port}`+ data[i].imgLink;
+            console.log(data[i].imgLink)
+            data[i].imgLink=`http://localhost:${port}` +  data[i].imgLink;
         }
 
         res.json(data);

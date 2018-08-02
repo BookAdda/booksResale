@@ -5,7 +5,7 @@ const path = require('path');
 const cors = require('cors');
 var createUser  = require('./routes/user/createUser');
 var profile = require('./routes/user/dashboard');
-var listBookCard =require('./routes/listBooks/listBookCard');
+var listBookCard =require('./routes/listBooks/listBookCard')
 var listBookAll = require('./routes/listBooks/listBookAll');
 var singleBook = require('./routes/listBooks/singleBook');
 var uploadBook=require('./routes/uploadBooks/uploadBook');
@@ -28,7 +28,7 @@ next();
 app.use('/api/createUser',createUser);
 app.use('/api/profile',profile);
 app.use('/api/listBookAll',listBookAll)
-app.use('api/listBookCard',listBookCard);
+app.use('/api/listBookCard',listBookCard);
 app.use('/api/singleBook',singleBook);
 app.use('/api/uploadBook',uploadBook);
 
