@@ -16,12 +16,17 @@ router.post('/register',function (req,res) {
             }
 
     )
-    newUser.save().then((userdata)=>
-    {
-        console.log('created:', userdata);
-        res.send(200);
+    newUser.save(function (err,usernew) {
+        if (err)
+        {
+res.json({'duplicateUsername': true})
 
-    });
+        } else
+            {
+             console.log('newUser:' ,usernew);
+             res.sendStatus(200)
+          }
+    })
 })
 
 module.exports=router;

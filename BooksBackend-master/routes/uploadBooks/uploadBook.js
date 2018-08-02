@@ -1,5 +1,6 @@
 var router=require('express').Router();
 var booksSchema=require('../../model/books');
+var userSchema = require('../../model/user');
 var path = require('path');
 var multer = require('multer');
     let filePathMulter;
@@ -50,7 +51,18 @@ console.log(pathOfFile)
             newBook.save().then(()=>
             {
                 console.log(newBook);
-                res.sendStatus(200)
+
+                //for testing username "pero"  , after it had to be changed with authToken
+
+                userSchema.findOneAndUpdate({ username:'pero' },{ $push:{booksOnSale:newBook}},function (err,data) {
+                    if (err) {
+                        res.json({"error": true});
+                    } else {
+                        res.sendStatus(200)
+
+                    }
+                });
+
 
             })
         });

@@ -13,7 +13,7 @@ var userSchema= new Schema({
 
     booksOnSale:
         {
-            type:String
+            type: Array
         },
     password:
         {
@@ -33,4 +33,5 @@ var userSchema= new Schema({
 
 })
 
+userSchema.index({username:1}, {unique:true})
 module.exports=mongoose.model('userSchema',userSchema);
