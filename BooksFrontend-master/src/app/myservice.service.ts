@@ -26,7 +26,7 @@ export class MyserviceService {
   private listingsurl : string = "http://localhost:8000/listingsdata";
   private wishlisturl : string = "http://localhost:8000/wishlistdata";
   private addbookurl : string = "http://localhost:8000/addbook";
-  private adduserurl : string = "http://localhost:8000/adduser";
+  private adduserurl : string = "http://localhost:8000/api/createUser/register";
   private detailurl : string = "http://localhost:8000/detail";
   private fetchurl : string = "http://localhost:8000/fetch";
   private addwishurl : string = "http://localhost:8000/addwish";
@@ -101,7 +101,7 @@ export class MyserviceService {
     return this.http.get(this.wishlisturl + `?id=` + localStorage.getItem('currentuid'));
   }
 
-  
+
   create (user) {
     return this.http.post<any>(this.adduserurl, user, httpOptions)
       .pipe(catchError(this.errorHandler))
@@ -127,7 +127,7 @@ export class MyserviceService {
 
   clearuid(){
     localStorage.removeItem('currentuid');
-  }  
+  }
 
   errorHandler(error: HttpErrorResponse) {
     return throwError(error)
