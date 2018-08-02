@@ -3,31 +3,31 @@ var Schema=mongoose.Schema;
 var userSchema= new Schema({
     name:
         {
-            type:string,
+            type:String,
             required:true
         },
     username: {
-        type:string,
+        type:String,
         required:true
     },
 
     booksOnSale:
         {
-            type:string
+            type:String
         },
     password:
         {
-            type:string,
+            type:String,
             required:true
         },
     phoneNumber:
         {
-          type:string,
+          type:String,
           required:true
         },
     wishlist:
         {
-           type:array
+           type:Array
          }
 
 

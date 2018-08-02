@@ -21,3 +21,5 @@ router.get('/register',function (req,res) {
 
     });
 })
+
+module.exports=router;

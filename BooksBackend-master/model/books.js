@@ -5,33 +5,34 @@ var booksSchema = new Schema({
 
 
     name:{
-        type:string,
+        type:String,
         required:true
     },
 
     writer:
         {
-            type:string,
+            type:String,
             required:true
         },
 
     sellingPrice:
         {
-            type:string,
+            type:Number,
             required:true
         },
     category:
         {
-            type:string,
+            type:String,
             required:true
         },
     description:
         {
-            type:string,
-            required:true
+            type:String
         },
-    imgsLink:
+    imgLink:
         {
-            type:array
+            type:String
         }
 })
+
+module.exports=mongoose.model('booksSchema', booksSchema);

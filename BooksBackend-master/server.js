@@ -8,7 +8,7 @@ var profile = require('./routes/user/dashboard');
 var listBookCard =require('./routes/listBooks/listBookCard');
 var listBookAll = require('./routes/listBooks/listBookAll');
 var singleBook = require('./routes/listBooks/singleBook');
-
+var uploadBook=require('./routes/uploadBooks/uploadBook');
 var mongoose=require('mongoose');
 mongoose.connect('mongodb://localhost/booksAdda');
 app.use(bodyParser.json());
@@ -30,8 +30,12 @@ app.use('/api/profile',profile);
 app.use('/api/listBookAll',listBookAll)
 app.use('api/listBookCard',listBookCard);
 app.use('/api/singleBook',singleBook);
+app.use('/api/uploadBook',uploadBook);
+
+
+
 app.listen(8000, () => {
-  console.log('Server started!');
+  console.log('Server started! at 8000');
 });
 
 
