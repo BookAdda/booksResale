@@ -2,16 +2,16 @@ var router=require('express').Router();
 var booksSchema =require('../../model/books');
 const port=process.env.PORT || 8000;
 
-router.get('/',function () {
+router.get('/',function (req,res) {
 
-    booksSchema.find({},function (data) {
+    booksSchema.find({},function (err,data) {
 
         for(var i=0;i<data.length;i++)
         {
             data[i].imgLink=`http://localhost:${port}`+ data[i].imgLink;
         }
 
-        res.JSON(data);
+        res.json(data);
 
     })
 })
