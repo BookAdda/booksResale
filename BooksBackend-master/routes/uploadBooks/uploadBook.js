@@ -3,6 +3,7 @@ var booksSchema=require('../../model/books');
 var userSchema = require('../../model/user');
 var path = require('path');
 var multer = require('multer');
+var verifyToken=require('../auth/verifyToken');
     let filePathMulter;
     var storage = multer.diskStorage({
         destination: (req, file, cb) =>
@@ -27,7 +28,7 @@ var multer = require('multer');
 ///////////////////////////////////////   ROUTING FOR MULTER CONTENT /////////////////////////////
 
 
-    router.post('/',upload.single('avatar'),function (req,res,next) {
+    router.post('/',upload.single('avatar'),verifyToken,function (req,res,next) {
         console.log("hello from upload data api" )
         console.log(req.body)
 

@@ -2,44 +2,42 @@
 var router=require('express').Router();
 var booksSchema = require('../../model/books');
 var userSchema=require('../../model/user');
+var verifyToken=require('../auth/verifyToken');
 
-router.post('/showWishList',function (req,res) {
-    var username=req.body.username;
-userSchema.findOneAndUpdate({username:username})
-    .exec(function (err,data) {
-        var wishlist=data.wishlist;
-        res.json(wishlist);
 
+router.post('/showWishList',verifyToken,function (req,res) {
+
+    var userId=req.userId;
+
+    userSchema.findById(userId,function (err,result) {
+        res.json(result.wishlist);
     })
 })
 
-router.post('/addToWishlist',function (req,res) {
-console.log("add to wishlist");
-    var username=req.body.username;
+router.post('/addToWishlist',verifyToken,function (req,res) {
+console.log("add to wishlist:", req.body.id);
     var bookId = req.body.id;
+    var userId=req.userId;
+
     console.log(bookId)
     booksSchema.findById(bookId)
         .exec(function (err,data) {
             //console.log(data);
-            userSchema.findOneAndUpdate({username:username},{$addToSet:{ wishlist: data}})
+            userSchema.findByIdAndUpdate(req.userId,{$addToSet:{ wishlist: data}})
                 .exec(function (err,user) {
-
-                    //console.log(user)
-
-                   // res.json(user);
-
                     res.sendStatus(200);
                 })
         })
 })
 
-router.post('/removeFromWishlist',function (req,res) {
-    var username=req.body.username;
+router.post('/removeFromWishlist',verifyToken,function (req,res) {
+    var userId=req.userId;
     var id = req.body.id;
-userSchema.findOneAndUpdate({username:username}, { $pull:{ wishlist:{ writer: 'dsasad' }}})
+userSchema.findOneAndUpdate({_id:userId}, { $pull:{ wishlist:{ _id: id }}})
     .exec(function (err,data) {
-        console.log(data);
-        res.send(data);
+        // console.log(data);
+        // res.send(data);
+        res.sendStatus(200);
     })
 
     })

@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
-var createUser  = require('./routes/user/createUser');
+var authUser  = require('./routes/auth/authUser');
 var profile = require('./routes/user/dashboard');
 var listBookCard =require('./routes/listBooks/listBookCard')
 var listBookAll = require('./routes/listBooks/listBookAll');
@@ -28,7 +28,7 @@ app.use('/', express.static(path.join(__dirname, '/public')));
 // });
 
 //routing
-app.use('/api/createUser',createUser);
+app.use('/api/auth',authUser);
 app.use('/api/profile',profile);
 app.use('/api/listBookAll',listBookAll);
 app.use('/api/listBookCategory',listBookCategory);

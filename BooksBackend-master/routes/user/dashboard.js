@@ -1,6 +1,7 @@
 
 var router=require('express').Router();
 var userSchema=require('../../model/user');
+var verifyToken=require('../auth/verifyToken');
 router.get('/:username',function (req,res) {
 
     var username=req.params.username;
@@ -16,7 +17,7 @@ router.get('/:username',function (req,res) {
 
 })
 
-router.get('/:username/dashboard',function (req,res) {
+router.get('/:username/dashboard',verifyToken,function (req,res) {
     var username=req.params.username;
     userSchema.find({username:username},function (err,data) {   //auth to be checked
         res.json(data);
